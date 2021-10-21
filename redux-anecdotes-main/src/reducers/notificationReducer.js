@@ -4,6 +4,7 @@ export const notificationReducer = (state = null, action) => {
     if(action.type === 'SHOW') return action.content 
     return state
 }
+let timeoutId
 
 export const showNoti = (content, time) => {
     console.log(content)
@@ -12,7 +13,8 @@ export const showNoti = (content, time) => {
             type: 'SHOW',
             content: content
         })
-        setTimeout(() => {
+        clearTimeout(timeoutId)
+        timeoutId = setTimeout(() => {
             dispatch({
                 type: "SHOW",
                 content: null

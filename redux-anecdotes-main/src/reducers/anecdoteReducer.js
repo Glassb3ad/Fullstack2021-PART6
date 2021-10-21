@@ -10,8 +10,8 @@ const asObject = (anecdote) => {
 }
 
 const reducer = (state = [], action) => {
-  console.log('state now: ', state)
-  console.log('action', action)
+  //console.log('state now: ', state)
+  //console.log('action', action)
   if(action.type === "LIKE") {
     return state.map(a => {return (a.id !== action.data.id ? a : action.data)})
   }
