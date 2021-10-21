@@ -7,12 +7,10 @@ const AnecdoteList = () => {
   const anecdotes = ((useSelector(state => state.anecdotes)).sort((a,b) => {return b.votes-a.votes})).filter(a => a.content.toLowerCase().includes(filter.toLowerCase()))
   const dispatch = useDispatch()
   
-    const vote = (id, content) => {
-      console.log('vote', id)
-      dispatch(like(id))
-      console.log(content)
-      dispatch(showNoti(content))
-      setTimeout(() => {dispatch(showNoti(''))}, 5000)
+    const vote = (id, content) => { 
+      const newAne = anecdotes.find(a => a.id === id)
+      dispatch(like(newAne))
+      dispatch(showNoti(`You voted "${content}"`, 5))
     }
 
 return (   
@@ -24,7 +22,7 @@ return (
       </div>
       <div>
         has {anecdote.votes}
-        <button onClick={() => vote(anecdote.id, anecdote.content)}>vote</button>
+        <button onClick={(event) => {event.preventDefault(); vote(anecdote.id, anecdote.content)}}>vote</button>
       </div>
     </div>
   )}

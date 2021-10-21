@@ -11,5 +11,10 @@ const newAnecdote = async (anecdote) => {
     return (await axios.post(baseUrl, anecdote))
 }
 
-const  anecdoteService = { getAll, newAnecdote }
+const updateAnecdote = async (anecdote) => {
+    const address = `${baseUrl}/${anecdote.id}`
+    return (await axios.put(address, anecdote))
+}
+
+const  anecdoteService = { getAll, newAnecdote, updateAnecdote }
 export default anecdoteService
